@@ -2,7 +2,7 @@
 
 A simple command-line tool for file management on Windows 11.
 
-[![npm version](https://img.shields.io/npm/v/primecli.svg)](https://www.npmjs.com/package/primecli)
+[![Static Badge](https://img.shields.io/badge/package-primetdmcli-light_green)](https://www.npmjs.com/package/primetdmcli)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yourusername/primecli/blob/main/LICENSE)
 
 ## Installation
