@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 const commander = require('commander');
+const path = require('path');
+const fs = require('fs');
+const chalk = require('chalk');
+
 const { createFile, deleteFile, runFile, downloadRepo, fileInfo } = require('./commands/fileCommands');
+
+const packageJson = require('./package.json');
+
 
 commander.version('1.0.0');
 
@@ -28,6 +35,13 @@ commander
   .command('info <filename>')
   .description('Displays file size, last modified date, and permissions')
   .action(fileInfo);
+
+  commander
+  .command('version')
+  .description('Display the current version of PrimeTDMCLI')
+  .action(() => {
+    console.log(chalk.green(`PrimeTDMCLI Version: ${packageJson.version}`));
+  });
 
 commander
   .command('help')
