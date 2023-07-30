@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process'); // added this line
 const chalk = require('chalk');
+const unzipper = require('unzipper');
 
 function createFile(filename) {
   fs.writeFile(filename, '', (err) => {
@@ -68,10 +69,32 @@ function fileInfo(filename) {
   });
 }
 
+function unzipFile(filename) {
+  const filePath = path.join(process.cwd(), filename);
+
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.error(chalk.red(`File '${filename}' does not exist.`));
+    } else {
+      console.log(chalk.green(`Unzipping '${filename}'...`));
+
+      fs.createReadStream(filePath)
+        .pipe(unzipper.Extract({ path: process.cwd() }))
+        .on('close', () => {
+          console.log(chalk.green(`File '${filename}' has been successfully unzipped.`));
+        })
+        .on('error', (unzipError) => {
+          console.error(chalk.red(`Error unzipping file '${filename}': ${unzipError.message}`));
+        });
+    }
+  });
+}
+
 module.exports = {
   createFile,
   deleteFile,
   runFile,
   downloadRepo,
   fileInfo,
+  unzipFile,
 };

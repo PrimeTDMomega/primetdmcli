@@ -1,6 +1,6 @@
 {
   "name": "primetdmcli",
-  "version": "1.7.0",
+  "version": "1.9.0",
   "description": "A CLI tool for file management",
   "main": "prime.js",
   "scripts": {
@@ -14,11 +14,13 @@
   "author": "primetdm (discord)",
   "license": "MIT",
   "dependencies": {
+    "archiver": "^5.3.1",
     "chalk": "^2.4.2",
     "commander": "^11.0.0",
     "fs": "^0.0.1-security",
     "inquirer": "^9.2.9",
-    "primetdmcli": "^1.5.0"
+    "primetdmcli": "^1.5.0",
+    "unzipper": "^0.10.14"
   },
   "bin": {
     "prime": "prime.js"

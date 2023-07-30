@@ -3,6 +3,7 @@ const commander = require('commander');
 const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
+const archiver = require('archiver');
 
 const {
   createFile,
@@ -10,7 +11,7 @@ const {
   runFile,
   downloadRepo,
   fileInfo,
-  viewFileMetadata, 
+  unzipFile,
 } = require('./commands/fileCommands');
 
 const packageJson = require('./package.json');
@@ -24,8 +25,34 @@ commander
   .description('Creates a file')
   .action(createFile);
 
+  commander
+  .command('zip <folderName>')
+  .description('Turns a folder into a ZIP file')
+  .action((folderName) => {
+    const folderPath = path.join(process.cwd(), folderName);
+    const zipPath = path.join(process.cwd(), `${folderName}.zip`);
+
+    const output = fs.createWriteStream(zipPath);
+    const archive = archiver('zip', {
+      zlib: { level: 9 }, // Compression level (0-9)
+    });
+
+    output.on('close', () => {
+      console.log(chalk.green(`Folder '${folderName}' has been compressed to '${folderName}.zip' successfully.`));
+    });
+
+    output.on('error', (err) => {
+      console.error(chalk.red(`Error creating ZIP file: ${err.message}`));
+    });
+
+    archive.directory(folderPath, folderName); // Add the entire folder to the ZIP archive
+
+    archive.pipe(output);
+    archive.finalize();
+  });
+
 commander
-  .command('remove <filename>')
+  .command('rm <filename>')
   .description('Deletes a file')
   .action(deleteFile);
 
@@ -137,18 +164,29 @@ commander
     });
   });
 
+  commander
+  .command('unzip <filename>')
+  .description('Unzips a ZIP file')
+  .action(unzipFile);
+
 commander
   .command('help')
   .description('Sends the available commands')
   .action(() => {
     console.log('Usage:');
-    console.log('  prime add <filename>');
-    console.log('  prime remove <filename>');
-    console.log('  prime run <filename>');
-    console.log('  prime download <githubRepoLink>');
-    console.log('  prime info <filename>');
-    console.log('  prime move <fileName> <directory>')
-    console.log('  prime help')
+    console.log('  prime add <filename>'); // 1
+    console.log('  prime rm <filename>'); // 2
+    console.log('  prime run <filename>'); // 3
+    console.log('  prime download <githubRepoLink>'); // 4
+    console.log('  prime info <filename>'); // 5
+    console.log('  prime move <fileName> <directory>') // 6
+    console.log('  prime help') // 7
+    console.log('  prime zip <fileName>') // 8
+    console.log('  prime unzip <fileName.zip>') // 9
+    console.log('  prime encrypt <fileName>') // 10
+    console.log('  prime decrypt <fileName>') // 11
+    console.log('  prime version') // 12
+
   });
 
 commander.parse(process.argv);
