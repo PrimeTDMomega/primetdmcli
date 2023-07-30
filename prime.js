@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const commander = require('commander');
-const { createFile, deleteFile, runFile } = require('./commands/fileCommands');
+const { createFile, deleteFile, runFile, downloadRepo } = require('./commands/fileCommands');
 
 commander.version('1.0.0');
 
@@ -20,6 +20,11 @@ commander
   .action(runFile);
 
 commander
+  .command('download <githubRepoLink>')
+  .description('Downloads the code from the GitHub repository')
+  .action(downloadRepo);
+
+commander
   .command('help')
   .description('Sends the available commands')
   .action(() => {
@@ -27,6 +32,7 @@ commander
     console.log('  prime add <filename>');
     console.log('  prime remove <filename>');
     console.log('  prime run <filename>');
+    console.log('  prime download <githubRepoLink>');
   });
 
 commander.parse(process.argv);

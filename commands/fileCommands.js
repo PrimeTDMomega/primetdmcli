@@ -42,8 +42,21 @@ function runFile(filename) {
   });
 }
 
+function downloadRepo(githubRepoLink) {
+  console.log(chalk.green('Downloading the code from the GitHub repository...'));
+  exec(`git clone ${githubRepoLink}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(chalk.red('Error downloading repository:'), error.message);
+    } else {
+      console.log(chalk.cyan(stdout));
+      console.error(chalk.red(stderr));
+    }
+  });
+}
+
 module.exports = {
   createFile,
   deleteFile,
   runFile,
+  downloadRepo, 
 };

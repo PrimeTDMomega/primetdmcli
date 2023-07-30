@@ -1,6 +1,6 @@
 {
   "name": "primetdmcli",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "A CLI tool for file management",
   "main": "prime.js",
   "scripts": {
@@ -17,7 +17,8 @@
     "chalk": "^2.4.2",
     "commander": "^11.0.0",
     "fs": "^0.0.1-security",
-    "inquirer": "^9.2.9"
+    "inquirer": "^9.2.9",
+    "primetdmcli": "^1.2.2"
   },
   "bin": {
     "prime": "prime.js"
@@ -25,7 +26,6 @@
   "directories": {
     "lib": "lib"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PrimeTDMomega/primetdmcli.git"
@@ -33,5 +33,6 @@
   "bugs": {
     "url": "https://github.com/PrimeTDMomega/primetdmcli/issues"
   },
-  "homepage": "https://github.com/PrimeTDMomega/primetdmcli#readme"
+  "homepage": "https://github.com/PrimeTDMomega/primetdmcli#readme",
+  "devDependencies": {}
 }
