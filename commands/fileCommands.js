@@ -54,9 +54,24 @@ function downloadRepo(githubRepoLink) {
   });
 }
 
+function fileInfo(filename) {
+  const filePath = path.join(process.cwd(), filename);
+  fs.stat(filePath, (err, stats) => {
+    if (err) {
+      console.error(chalk.red(`File '${filename}' does not exist.`));
+    } else {
+      console.log(chalk.cyan(`File Info for '${filename}':`));
+      console.log(chalk.yellow(`Size: ${stats.size} bytes`));
+      console.log(chalk.yellow(`Last Modified: ${stats.mtime}`));
+      console.log(chalk.yellow(`Permissions: ${stats.mode.toString(8).slice(-3)}`));
+    }
+  });
+}
+
 module.exports = {
   createFile,
   deleteFile,
   runFile,
-  downloadRepo, 
+  downloadRepo,
+  fileInfo,
 };

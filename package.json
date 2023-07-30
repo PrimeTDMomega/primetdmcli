@@ -1,6 +1,6 @@
 {
   "name": "primetdmcli",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A CLI tool for file management",
   "main": "prime.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "commander": "^11.0.0",
     "fs": "^0.0.1-security",
     "inquirer": "^9.2.9",
-    "primetdmcli": "^1.2.2"
+    "primetdmcli": "^1.3.0"
   },
   "bin": {
     "prime": "prime.js"
