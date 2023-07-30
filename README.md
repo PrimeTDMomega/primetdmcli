@@ -52,6 +52,7 @@ The Prime CLI offers the following commands:
 -   `prime run <filename.extension>`: Runs the specified file in the terminal.
 -   `prime download <github_repository_link>`: Downloads the code from the specified GitHub repository.
 -   `prime info <filename.extension>`: Displays information about the specified file, including its size, last modified date, and permissions.
+-   `prime move <fileName.extension> <directory>`: Moves a file from one folder to another.
 
 ## Contributing
 
