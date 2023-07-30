@@ -7,10 +7,10 @@ A simple command-line tool for file management on Windows 11.
 
 ## Installation
 
-Ensure you have [Node.js](https://nodejs.org/) installed. Then, install `primecli` globally using npm:
+Ensure you have [Node.js](https://nodejs.org/) installed. Then, install `primetdmcli` globally using npm:
 
 ```bash
-npm install -g primecli
+npm install -g primetdmcli
 ```
 
 ## Usage
