@@ -4,12 +4,20 @@ const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
 
-const { createFile, deleteFile, runFile, downloadRepo, fileInfo } = require('./commands/fileCommands');
+const {
+  createFile,
+  deleteFile,
+  runFile,
+  downloadRepo,
+  fileInfo,
+  viewFileMetadata, 
+} = require('./commands/fileCommands');
 
 const packageJson = require('./package.json');
 
 
 commander.version('1.0.0');
+  
 
 commander
   .command('add <filename>')
@@ -141,6 +149,7 @@ commander
     console.log('  prime info <filename>');
     console.log('  prime move <fileName> <directory>')
     console.log('  prime help')
+    console.log('  prime metadata view <filename>');
   });
 
 commander.parse(process.argv);
