@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { exec } = require('child_process'); // added this line
 const chalk = require('chalk');
 
 function createFile(filename) {
@@ -22,7 +23,27 @@ function deleteFile(filename) {
   });
 }
 
+function runFile(filename) {
+  const filePath = path.join(process.cwd(), filename); // <-- Updated line to resolve the correct file path
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.error(chalk.red(`File '${filename}' does not exist.`));
+    } else {
+      console.log(chalk.green(`Running file '${filename}' in the terminal:`));
+      exec(`node "${filePath}"`, (error, stdout, stderr) => { // <-- Added double quotes to the file path
+        if (error) {
+          console.error(chalk.red('Error executing file:'), error.message);
+        } else {
+          console.log(chalk.cyan(stdout));
+          console.error(chalk.red(stderr));
+        }
+      });
+    }
+  });
+}
+
 module.exports = {
   createFile,
   deleteFile,
+  runFile,
 };

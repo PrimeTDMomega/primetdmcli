@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const commander = require('commander');
-const { createFile, deleteFile } = require('./commands/fileCommands');
+const { createFile, deleteFile, runFile } = require('./commands/fileCommands');
 
 commander.version('1.0.0');
 
@@ -15,12 +15,18 @@ commander
   .action(deleteFile);
 
 commander
+  .command('run <filename>')
+  .description('Runs the specified file in the terminal')
+  .action(runFile);
+
+commander
   .command('help')
-  .description('Sends the 2 commands above')
+  .description('Sends the available commands')
   .action(() => {
     console.log('Usage:');
     console.log('  prime add <filename>');
     console.log('  prime remove <filename>');
+    console.log('  prime run <filename>');
   });
 
 commander.parse(process.argv);
