@@ -1,6 +1,6 @@
 # Prime CLI
 
-A simple command-line tool for file management on Windows 11.
+A simple command-line tool for file management on Windows 11. If someone knows how to write a better README.md please write one for me lol
 
 [![Static Badge](https://img.shields.io/badge/package-primetdmcli-light_green)](https://www.npmjs.com/package/primetdmcli)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
