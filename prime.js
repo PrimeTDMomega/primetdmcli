@@ -43,6 +43,29 @@ commander
     console.log(chalk.green(`PrimeTDMCLI Version: ${packageJson.version}`));
   });
 
+  commander
+  .command('move <filename> <directory>')
+  .description('Move a file to the specified directory')
+  .action((filename, directory) => {
+    const currentPath = path.join(process.cwd(), filename);
+    const targetPath = path.join(process.cwd(), directory, filename);
+
+    fs.access(currentPath, fs.constants.F_OK, (err) => {
+      if (err) {
+        console.error(chalk.red(`File '${filename}' does not exist in the current path.`));
+      } else {
+        // Move the file to the target path
+        fs.rename(currentPath, targetPath, (moveErr) => {
+          if (moveErr) {
+            console.error(chalk.red(`Error moving file '${filename}': ${moveErr.message}`));
+          } else {
+            console.log(chalk.green(`File '${filename}' moved to '${directory}' successfully.`));
+          }
+        });
+      }
+    });
+  });
+
 commander
   .command('help')
   .description('Sends the available commands')
@@ -53,6 +76,7 @@ commander
     console.log('  prime run <filename>');
     console.log('  prime download <githubRepoLink>');
     console.log('  prime info <filename>');
+    console.log('  prime move <fileName> <directory>')
   });
 
 commander.parse(process.argv);
