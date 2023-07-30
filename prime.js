@@ -77,6 +77,7 @@ commander
     console.log('  prime download <githubRepoLink>');
     console.log('  prime info <filename>');
     console.log('  prime move <fileName> <directory>')
+    console.log('  prime help')
   });
 
 commander.parse(process.argv);
