@@ -53,6 +53,8 @@ The Prime CLI offers the following commands:
 -   `prime download <github_repository_link>`: Downloads the code from the specified GitHub repository.
 -   `prime info <filename.extension>`: Displays information about the specified file, including its size, last modified date, and permissions.
 -   `prime move <fileName.extension> <directory>`: Moves a file from one folder to another.
+-   `prime encrypt <fileName.extension>`: Encrypts a file using Caeser Cypher.
+-   `prime decrypt <fileName.extension>`: Decrypts a file from Caeser Cypher.
 
 ## Contributing
 
