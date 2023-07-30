@@ -13,23 +13,6 @@ Ensure you have [Node.js](https://nodejs.org/) installed. Then, install `primetd
 npm install -g primetdmcli
 ```
 
-## Usage
-
-```bash
-node prime help
-```
-Lists all commands
-
-```bash
-node prime add <fileName.extension>
-```
-Creates file
-
-```bash
-node prime remove <fileName.extension>
-```
-Deletes file
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/yourusername/primecli/blob/main/LICENSE) file for details.
