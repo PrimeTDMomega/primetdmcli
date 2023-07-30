@@ -66,6 +66,69 @@ commander
     });
   });
 
+  function caesarEncrypt(text, shift) {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      let char = text[i];
+      if (char.match(/[a-z]/i)) {
+        const code = text.charCodeAt(i);
+        if (code >= 65 && code <= 90) {
+          char = String.fromCharCode(((code - 65 + shift) % 26) + 65);
+        } else if (code >= 97 && code <= 122) {
+          char = String.fromCharCode(((code - 97 + shift) % 26) + 97);
+        }
+      }
+      result += char;
+    }
+    return result;
+  }
+
+  function caesarDecrypt(text, shift) {
+    return caesarEncrypt(text, 26 - shift);
+  }
+
+  commander
+  .command('encrypt <filename>')
+  .description('Encrypts the contents of the specified file using Caesar cipher')
+  .action((filename) => {
+    const filePath = path.join(process.cwd(), filename);
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        console.error(chalk.red(`Error reading file '${filename}': ${err.message}`));
+      } else {
+        const encryptedData = caesarEncrypt(data, 3); // You can choose any shift value
+        fs.writeFile(filePath, encryptedData, 'utf8', (writeErr) => {
+          if (writeErr) {
+            console.error(chalk.red(`Error encrypting file '${filename}': ${writeErr.message}`));
+          } else {
+            console.log(chalk.green(`File '${filename}' encrypted successfully.`));
+          }
+        });
+      }
+    });
+  });
+
+  commander
+  .command('decrypt <filename>')
+  .description('Decrypts the contents of the specified file encrypted using Caesar cipher')
+  .action((filename) => {
+    const filePath = path.join(process.cwd(), filename);
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        console.error(chalk.red(`Error reading file '${filename}': ${err.message}`));
+      } else {
+        const decryptedData = caesarDecrypt(data, 3); // You need to use the same shift value as used during encryption
+        fs.writeFile(filePath, decryptedData, 'utf8', (writeErr) => {
+          if (writeErr) {
+            console.error(chalk.red(`Error decrypting file '${filename}': ${writeErr.message}`));
+          } else {
+            console.log(chalk.green(`File '${filename}' decrypted successfully.`));
+          }
+        });
+      }
+    });
+  });
+
 commander
   .command('help')
   .description('Sends the available commands')
