@@ -55,13 +55,15 @@ The Prime CLI offers the following commands:
 -   `prime move <fileName.extension> <directory>`: Moves a file from one folder to another.
 -   `prime encrypt <fileName.extension>`: Encrypts a file using Caeser Cypher.
 -   `prime decrypt <fileName.extension>`: Decrypts a file from Caeser Cypher.
+-   `prime compare <file1> <file2>`: Compares two files.
+-   `prime deldir <folderName>`: Deletes the specified directory.
 
 ## Contributing
 
 We welcome contributions from the community to improve the Prime CLI and make it even more useful for developers. If you find a bug, have an idea for a new feature, or want to submit enhancements, please consider opening an issue or pull request on our GitHub repository and preferably contact me on my Discord Server
 
 -   [GitHub Repository](https://github.com/PrimeTDMomega/primetdmcli/)
-- [Personal Discord Server](https://dsc.gg/witheredknights/)
+-   [Personal Discord Server](https://dsc.gg/witheredknights/)
 
 We appreciate your help in making the Prime CLI better for everyone!
 

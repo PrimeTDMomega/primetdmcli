@@ -198,8 +198,8 @@ commander
     console.log('  prime encrypt <fileName>') // 10
     console.log('  prime decrypt <fileName>') // 11
     console.log('  prime version') // 12
-    console.log('  prime deldir <folderName>')
-    console.log('  prime compare <file1> <file2>')
+    console.log('  prime deldir <folderName>') // 13
+    console.log('  prime compare <file1> <file2>') // 14
 
   });
 
