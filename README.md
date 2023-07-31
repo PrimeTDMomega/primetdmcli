@@ -57,6 +57,7 @@ The Prime CLI offers the following commands:
 -   `prime decrypt <fileName.extension>`: Decrypts a file from Caeser Cypher.
 -   `prime compare <file1> <file2>`: Compares two files.
 -   `prime deldir <folderName>`: Deletes the specified directory.
+-   `prime tree <directoryName>`: Lists all files & folders in a specified directory.
 
 ## Contributing
 
