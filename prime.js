@@ -14,6 +14,7 @@ const {
   unzipFile,
   deleteDirectory,
   compareFiles,
+  listDirectoryTree,
 } = require('./commands/fileCommands');
 
 const packageJson = require('./package.json');
@@ -181,6 +182,11 @@ commander
   .description('Deletes a directory and its contents')
   .action(deleteDirectory);
 
+  commander
+  .command('tree <folderDirectory>')
+  .description('Lists the contents of a directory and its subdirectories')
+  .action(listDirectoryTree);
+
 commander
   .command('help')
   .description('Sends the available commands')
@@ -200,6 +206,7 @@ commander
     console.log('  prime version') // 12
     console.log('  prime deldir <folderName>') // 13
     console.log('  prime compare <file1> <file2>') // 14
+    console.log('  prime tree <folderName>') // 15
 
   });
 

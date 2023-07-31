@@ -144,6 +144,30 @@ function compareFiles(file1, file2) {
   });
 }
 
+function listDirectoryTree(folderDirectory, depth = 0) {
+  const absolutePath = path.resolve(process.cwd(), folderDirectory);
+
+  if (!fs.existsSync(absolutePath)) {
+    console.error(chalk.red(`Directory '${folderDirectory}' does not exist.`));
+    return;
+  }
+
+  const files = fs.readdirSync(absolutePath);
+
+  files.forEach((file) => {
+    const filePath = path.join(absolutePath, file);
+    const isDirectory = fs.statSync(filePath).isDirectory();
+
+    if (isDirectory) {
+      console.log(`${' '.repeat(depth * 2)}${chalk.blue(file)}/`);
+      listDirectoryTree(filePath, depth + 1);
+    } else {
+      console.log(`${' '.repeat(depth * 2)}${file}`);
+    }
+  });
+}
+
+
 module.exports = {
   createFile,
   deleteFile,
@@ -153,4 +177,5 @@ module.exports = {
   unzipFile,
   deleteDirectory,
   compareFiles,
+  listDirectoryTree,
 };
