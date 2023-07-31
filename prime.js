@@ -12,6 +12,8 @@ const {
   downloadRepo,
   fileInfo,
   unzipFile,
+  deleteDirectory,
+  compareFiles,
 } = require('./commands/fileCommands');
 
 const packageJson = require('./package.json');
@@ -24,6 +26,11 @@ commander
   .command('add <filename>')
   .description('Creates a file')
   .action(createFile);
+
+  commander
+  .command('compare <file1> <file2>')
+  .description('Compares the contents of two files and highlights differences')
+  .action(compareFiles);
 
   commander
   .command('zip <folderName>')
@@ -169,6 +176,11 @@ commander
   .description('Unzips a ZIP file')
   .action(unzipFile);
 
+  commander
+  .command('deldir <directoryName>')
+  .description('Deletes a directory and its contents')
+  .action(deleteDirectory);
+
 commander
   .command('help')
   .description('Sends the available commands')
@@ -186,6 +198,8 @@ commander
     console.log('  prime encrypt <fileName>') // 10
     console.log('  prime decrypt <fileName>') // 11
     console.log('  prime version') // 12
+    console.log('  prime deldir <folderName>')
+    console.log('  prime compare <file1> <file2>')
 
   });
 

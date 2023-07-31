@@ -3,6 +3,7 @@ const path = require('path');
 const { exec } = require('child_process'); // added this line
 const chalk = require('chalk');
 const unzipper = require('unzipper');
+const diff = require('diff');
 
 function createFile(filename) {
   fs.writeFile(filename, '', (err) => {
@@ -90,6 +91,59 @@ function unzipFile(filename) {
   });
 }
 
+function deleteDirectory(directoryName) {
+  const directoryPath = path.join(process.cwd(), directoryName);
+
+  fs.access(directoryPath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.error(chalk.red(`Directory '${directoryName}' does not exist.`));
+    } else {
+      console.log(chalk.green(`Deleting directory '${directoryName}' and its contents...`));
+      deleteDirectoryRecursive(directoryPath);
+    }
+  });
+}
+
+function deleteDirectoryRecursive(directoryPath) {
+  if (fs.existsSync(directoryPath)) {
+    fs.readdirSync(directoryPath).forEach((file) => {
+      const curPath = path.join(directoryPath, file);
+      if (fs.lstatSync(curPath).isDirectory()) {
+        deleteDirectoryRecursive(curPath); // Recursive call for nested directories
+      } else {
+        fs.unlinkSync(curPath); // Delete the file
+      }
+    });
+    fs.rmdirSync(directoryPath); // Delete the empty directory once its contents are removed
+    console.log(chalk.green(`Directory '${path.basename(directoryPath)}' and its contents have been successfully deleted.`));
+  }
+}
+
+function compareFiles(file1, file2) {
+  const filePath1 = path.join(process.cwd(), file1);
+  const filePath2 = path.join(process.cwd(), file2);
+
+  fs.readFile(filePath1, 'utf8', (err, data1) => {
+    if (err) {
+      console.error(chalk.red(`Error reading file '${file1}': ${err.message}`));
+    } else {
+      fs.readFile(filePath2, 'utf8', (err, data2) => {
+        if (err) {
+          console.error(chalk.red(`Error reading file '${file2}': ${err.message}`));
+        } else {
+          console.log(chalk.green(`Comparing files '${file1}' and '${file2}':`));
+          const differences = diff.diffLines(data1, data2);
+
+          differences.forEach((part) => {
+            const color = part.added ? 'green' : part.removed ? 'red' : 'grey';
+            process.stdout.write(chalk[color](part.value));
+          });
+        }
+      });
+    }
+  });
+}
+
 module.exports = {
   createFile,
   deleteFile,
@@ -97,4 +151,6 @@ module.exports = {
   downloadRepo,
   fileInfo,
   unzipFile,
+  deleteDirectory,
+  compareFiles,
 };
