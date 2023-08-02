@@ -58,6 +58,9 @@ The Prime CLI offers the following commands:
 -   `prime compare <file1> <file2>`: Compares two files.
 -   `prime deldir <folderName>`: Deletes the specified directory.
 -   `prime tree <directoryName>`: Lists all files & folders in a specified directory.
+-   `prime version`: Shows current version of primetdmcli.
+-   `prime zip <folderName>`: Compresses a specified folder to a `.zip` file.
+-   `prime upzip <foldername>`: De-compresses a `.zip` file.
 
 ## Contributing
 
