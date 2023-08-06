@@ -15,6 +15,26 @@ function createFile(filename) {
   });
 }
 
+function replaceTextInFile(filename, searchText, replacementText) {
+  const filePath = path.join(process.cwd(), filename);
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error(chalk.red(`Error reading file '${filename}': ${err.message}`));
+    } else {
+      const updatedData = data.replace(new RegExp(searchText, 'g'), replacementText);
+
+      fs.writeFile(filePath, updatedData, 'utf8', (writeErr) => {
+        if (writeErr) {
+          console.error(chalk.red(`Error replacing text in file '${filename}': ${writeErr.message}`));
+        } else {
+          console.log(chalk.green(`Text replaced successfully in '${filename}'.`));
+        }
+      });
+    }
+  });
+}
+
 function deleteFile(filename) {
   fs.unlink(filename, (err) => {
     if (err) {
@@ -178,4 +198,5 @@ module.exports = {
   deleteDirectory,
   compareFiles,
   listDirectoryTree,
+  replaceTextInFile,
 };

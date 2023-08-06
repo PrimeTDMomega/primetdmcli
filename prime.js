@@ -15,12 +15,20 @@ const {
   deleteDirectory,
   compareFiles,
   listDirectoryTree,
+    replaceTextInFile,
 } = require('./commands/fileCommands');
 
 const packageJson = require('./package.json');
 
 
 commander.version('1.0.0');
+
+commander
+    .command('replace <fileName> <searchText> <replacementText>')
+    .description('Replaces all occurrences of the search text with the replacement text in the specified file')
+    .action((fileName, searchText, replacementText) => {
+      replaceTextInFile(fileName, searchText, replacementText);
+    });
   
 
 commander
