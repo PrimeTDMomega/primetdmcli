@@ -215,6 +215,7 @@ commander
     console.log('  prime deldir <folderName>') // 13
     console.log('  prime compare <file1> <file2>') // 14
     console.log('  prime tree <folderName>') // 15
+    console.log('  prime replace <filName> <selectText> <replacementText>') // 16
 
   });
 

@@ -8,7 +8,7 @@ Welcome to the Prime CLI! This command-line interface (CLI) tool is designed to 
 -   [Introduction](#Introduction)
 -   [Installation](#installation)
 -   [Usage](#usage)
--   [Available Commands](available-commands)
+-   [Available Commands](#available-commands)
 -   [Contributing](#contributing)
 -   [License](#license)
 
@@ -61,6 +61,7 @@ The Prime CLI offers the following commands:
 -   `prime version`: Shows current version of primetdmcli.
 -   `prime zip <folderName>`: Compresses a specified folder to a `.zip` file.
 -   `prime upzip <foldername>`: De-compresses a `.zip` file.
+-   `prime replace <fileName> <selectText> <replacementText>`: Replaces all occourances of search text with specified text.
 
 ## Contributing
 
