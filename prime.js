@@ -15,7 +15,7 @@ const {
   deleteDirectory,
   compareFiles,
   listDirectoryTree,
-    replaceTextInFile,
+  replaceTextInFile,
 } = require('./commands/fileCommands');
 
 const packageJson = require('./package.json');
@@ -194,6 +194,11 @@ commander
   .command('tree <folderDirectory>')
   .description('Lists the contents of a directory and its subdirectories')
   .action(listDirectoryTree);
+
+  commander
+  .command('download <githubRepoLink>')
+  .description('Downloads the code from the GitHub repository')
+  .action(downloadRepo);
 
 commander
   .command('help')

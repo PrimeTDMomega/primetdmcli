@@ -65,10 +65,21 @@ function runFile(filename) {
 }
 
 function downloadRepo(githubRepoLink) {
-  console.log(chalk.green('Downloading the code from the GitHub repository...'));
-  exec(`git clone ${githubRepoLink}`, (error, stdout, stderr) => {
+  if (!githubRepoLink.startsWith('https://')) {
+    console.error(chalk.red('Error: Invalid GitHub repository link. Please provide a valid GitHub repository link.'));
+    return;
+  }
+
+  const repoName = githubRepoLink.split('/').pop().split('.')[0];
+  const gitCloneCmd = `git clone ${githubRepoLink} ${repoName}`;
+
+  exec(gitCloneCmd, (error, stdout, stderr) => {
     if (error) {
-      console.error(chalk.red('Error downloading repository:'), error.message);
+      if (error.code === 127) {
+        console.error(chalk.red('Error: Git not found. Please install Git to use the download command.'));
+      } else {
+        console.error(chalk.red('Error downloading repository:'), error.message);
+      }
     } else {
       console.log(chalk.cyan(stdout));
       console.error(chalk.red(stderr));
@@ -186,6 +197,8 @@ function listDirectoryTree(folderDirectory, depth = 0) {
     }
   });
 }
+
+
 
 
 module.exports = {
